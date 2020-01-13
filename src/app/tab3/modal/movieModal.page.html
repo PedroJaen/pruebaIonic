@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Seleccione un resultado
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngIf="loaded">
+        <ion-radio-group (ionChange)="radioGroupChange($event)">
+            <ion-item *ngFor="let item of items">
+                <ion-radio slot="start" value="{{item.id}}"></ion-radio>
+                <ion-thumbnail *ngIf="item.poster_path">
+                    <img src="{{image + item.poster_path}}" />
+                </ion-thumbnail>
+                <div *ngIf="format === 'Pelicula'">
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.release_date}}</p>
+                </div>
+                <div *ngIf="format === 'Serie'">
+                    <h3>{{item.name}}</h3>
+                    <p>{{item.first_air_date}}</p>
+                </div>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+
+    <ion-button (click)="dismiss()">
+        <ion-label>Close</ion-label>
+    </ion-button>
+</ion-content>
